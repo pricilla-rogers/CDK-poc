@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+// $brand: 'rogers'; // 'rogers' | 'fido' | 'chatr' | 'r4b'
+// @import '~@rogers/cdk/styles/base';
+// @import '~@rogers/cdk/styles/global';
+
+// @import '~@rogers/cdk/modal/index';
+// @import '~@rogers/cdk/button/index';
+// @import '~@rogers/cdk/icon/index';
+// @import '~@rogers/cdk/picture/index';
+/* Importing Bootstrap SCSS file. */
+
+
+
+$brand: 'rogers'; // 'rogers' | 'fido' | 'chatr' | 'r4b'
+
+@import '~@rogers/cdk/styles/base'; // These imports should only be
+
+@import '~@rogers/cdk/styles/global'; // placed in styles.scss file or root scss file.
+
+@import '~@rogers/cdk/button/index';
+
+@import '~@rogers/cdk/icon/index';
+
+@import '~@rogers/cdk/assembled/header';
+
+@import '~@rogers/cdk/table/index';
+
+@import '~@rogers/cdk/form/index';
+
+@import '~@rogers/cdk/tabs/index';
+
+@import '~@rogers/cdk/modal/index';
+@import '~@rogers/cdk/assembled/parallax/index';
+
+//@import '~@rogers/cdk/lib/layouts/header';
+
+
+
+@import '~@rogers/cdk/popover/index';
+
+@import '~@rogers/cdk/carousel/index';
+@import '~@rogers/cdk/picture/index';
+@import '~@rogers/cdk/breadcrumb/index';
+@import '~@rogers/cdk/popover/index';
+@import '~@rogers/cdk/label/index';
+@import '~@rogers/cdk/video/index';
+@import '~@rogers/cdk/link/index';
+@import '~@rogers/cdk/assembled/footer/index';
+@import '~@rogers/cdk/assembled/link/index';
+// @import '~@rogers/cdk/lib/layouts/layout/layout';
+// @import '~@rogers/cdk/styles/index.scss';

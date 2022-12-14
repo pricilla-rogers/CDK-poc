@@ -1,0 +1,790 @@
+<h2>Student Details</h2>
+<!-- [ngStyle]="{'color':bgColor,'text-decoration':decor}" -->
+
+<!-- <h2>Student Details</h2> -->
+<div>
+
+  <div style="margin-left: 70%;">
+    <!-- <button ds-button (click)="login()">
+    log in
+  </button>&nbsp; -->
+    <button ds-button size="small" (click)="logout()">Log Out</button>
+
+  </div>
+</div>
+
+<!-- <div *ngIf="logged==false"><app-login></app-login></div> -->
+
+<!-- tabs start -->
+<div class="row">
+  <div class="col-10">
+    <ds-tabs [ariaLabel]="'nav tabs'" [alignTabsCenter]="true">
+
+      <ds-tab-item tabTitle="Student Details" tabCaption="BasicDetails" (slideIn)="setTab('basicdetails')"
+        class="nav-tab"></ds-tab-item>
+      <ds-tab-item tabTitle="Teacher Details" tabCaption="Teacher Details" (slideIn)="setTab('moredetails')"
+        class="nav-tab"></ds-tab-item>
+      <ds-tab-item tabTitle="Tution Details" tabCaption="Tution Details" (slideIn)="setTab('tutiondetails')"
+        class="nav-tab"></ds-tab-item>
+      <ds-tab-item tabTitle="AboutUs" tabCaption="About Us" (slideIn)="setTab('studentdetails')" class="nav-tab">
+      </ds-tab-item>
+    </ds-tabs>
+  </div>
+</div>
+
+<div style="margin-left: 70%;">
+  <button style="margin-top: 20px;" ds-button (click)="openModalWithComponent(basicdetails)" size="small"
+    *ngIf="currentTab=='basicdetails'">
+    Create New
+  </button>
+  <button style="margin-top: 20px;" ds-button (click)="openModal(moreDetails)" size="small"
+    *ngIf="currentTab=='moredetails'">
+    Create New
+  </button>
+  <!-- <button style="margin-top: 20px;" ds-button (click)="openModal(tutiondetails)" size="small"
+    *ngIf="currentTab=='tutiondetails'">
+    Create New
+  </button> -->
+  <!-- <button style="margin-top: 20px;" ds-button (click)="openModal(studentdetails)" size="small"
+    *ngIf="currentTab=='studentdetails'">
+    About Us
+  </button> -->
+
+
+</div>
+<br>
+
+
+
+<dsa-elastic-tile *ngFor="let tile of tiles" [elasticTile]="tile.heading" (elementClick)="handleClick($event)"
+  (expanderClick)="handleClick($event)"></dsa-elastic-tile>
+
+<!-- basicdetails modal start -->
+<ng-template #basicdetails>
+  <ds-modal (closeClick)="modalCloseButtonClick($event)" heading="Student Form" closeCaption="close modal" size="large-adaptive">
+    <div body>
+      <div>
+        <dsa-alert [data]="data1" [config]="config" (ctaClick)="handleCtaClick($event)"
+          (closeClick)="handleCloseClick($event)"></dsa-alert>
+      </div>
+      <br/>
+      <form [formGroup]="userForm">
+
+        <div class="form-group">
+          <ds-form-field class="mb-10">
+            <ds-input-label>Name</ds-input-label>
+            <div class="form-row">
+              <input dsInput formControlName="nameControl" />
+            </div>
+            <ds-error errorMessage="Name is <strong>required</strong>"></ds-error>
+          </ds-form-field>
+        </div>
+
+
+        <!-- <ds-icon [name]="'close'" size="32"></ds-icon> -->
+        <div class="form-group">
+          <ds-form-field class="mb-10">
+            <ds-input-label>Phone</ds-input-label>
+            <input dsInput formControlName="phoneControl" />
+            <ds-error errorMessage="Phone number is <strong>required</strong>"></ds-error>
+          </ds-form-field>
+        </div>
+
+
+
+        <div class="form-group">
+          <ds-form-field class="mb-10">
+            <ds-input-label>Address</ds-input-label>
+            <input type="text-area" dsInput formControlName="addressControl" />
+            <ds-error errorMessage="Address is <strong>required</strong>"></ds-error>
+          </ds-form-field>
+        </div>
+
+        <div class="form-group">
+          <ds-form-field class="mb-10">
+            <ds-input-label>Percentage</ds-input-label>
+            <input dsInput formControlName="percentageControl" />
+            <ds-error errorMessage="Name is <strong>required</strong>"></ds-error>
+          </ds-form-field>
+        </div>
+
+        <div class="form-group">
+          <ds-input-label>Gender</ds-input-label>
+          <ds-radio-group (change)="radioonChange($event)" formControlName="gender">
+            <div class="d-flex flex-column">
+              <ds-radio-button id="exampleRadios1" value="Male">
+                Male
+              </ds-radio-button>
+              <ds-radio-button id="exampleRadios2" value="Female">
+                Female
+              </ds-radio-button>
+            </div>
+          </ds-radio-group>
+        </div>
+
+
+
+        <div class="form-group">
+          <div class="col-md-12">
+            <ds-form-field>
+              <ds-input-label>Slots</ds-input-label>
+              <select (change)="selectChangeHandler($event)" dsNativeControl formControlName="slots">
+                <!-- Add a blank option only for Safari -->
+                <option value=""></option>
+                <option value="4-5">4-5</option>
+                <option value="5-6">5-6</option>
+                <option value="6-7">6-7</option>
+                <option value="7-8">7-8</option>
+              </select>
+
+            </ds-form-field>
+            <!-- <ds-form-group [legend]="'Checkbox example'" *ngFor="let newstudent of newArray.controls; let i = index;">
+            <ds-checkbox required (change)="onChange()" id="inlineCheckbox{{i}}" [formControl]="newstudent">{{new[i]}}</ds-checkbox>
+            
+          </ds-form-group> -->
+          </div>
+        </div>
+
+        <div>
+          <ds-file-upload [data]="fileData" formControlName="fileUpload">
+            <input dsFile type="file"
+              accept=".doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/*"
+              [maxSize]="100" multiple required />
+          </ds-file-upload>
+        </div>
+
+        <div class="form-group">
+          <div footer class="mb-10">
+            <button class="mr-8" ds-button type="submit" [disabled]="!userForm.valid" size="small"
+              (click)="addItem()">Add</button>&nbsp;
+            <button class="mr-8" ds-button size="small" (click)="reset()">Reset</button>
+          </div>
+        </div>
+
+        <!-- <div>
+          <span ds-label variant="custom" class="px-20 ds-borders ds-bgcolor-yellow">
+            <ds-icon [name]="'warning'"></ds-icon>
+            Please fill the all components
+          </span>
+        </div> -->
+      </form>
+    </div>
+
+  </ds-modal>
+</ng-template>
+
+<!-- more details modal start -->
+<ng-template #moreDetails>
+  <ds-modal (closeClick)="modalCloseButtonClick($event)" heading="Teachers Form" closeCaption="close modal"
+    size="large-adaptive">
+    <div body>
+      <div>
+        <dsa-alert [data]="data1" [config]="config" (ctaClick)="handleCtaClick($event)"
+          (closeClick)="handleCloseClick($event)"></dsa-alert>
+      </div>
+      <br/>
+      <!-- <h3>More Detaisl</h3> -->
+      <form [formGroup]="moreForm">
+
+        <div class="form-group">
+          <div class="col-md-12">
+            <ds-form-field class="mb-10">
+              <ds-input-label>Name</ds-input-label>
+              <input dsInput formControlName="nameControl" />
+              <ds-error errorMessage="Name is <strong>required</strong>"></ds-error>
+            </ds-form-field>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-12">
+            <ds-form-field class="mb-10">
+              <ds-input-label>Phone</ds-input-label>
+              <input dsInput formControlName="phoneControl" />
+              <ds-error errorMessage="Phone number is <strong>required</strong>"></ds-error>
+            </ds-form-field>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-12">
+            <ds-form-field class="mb-10">
+              <ds-input-label>E-mail</ds-input-label>
+              <input dsInput formControlName="emailControl" />
+              <ds-error errorMessage="email is <strong>required</strong>"></ds-error>
+            </ds-form-field>
+          </div>
+        </div>
+
+        <ds-input-label>Experience</ds-input-label>
+        <ds-slider class="mt-24" [data]="captions" [showTicks]="showTicks" #sliderComp>
+          <span ds-slide-label>{{ slider.value }} Years</span>
+          <input dsSlider #slider (change)="event.emit($event)" formControlName="experienceControl" type="range"
+            [min]="0" [max]="10" [step]="1" [value]="10" />
+          <!-- <span ds-slide-left-label>{{ slider.min }}</span>
+        <span ds-slide-right-label>{{ slider.max }}</span> -->
+        </ds-slider>
+
+        <!-- <div class="form-group">
+        <div class="col-md-12">
+          <ds-form-field>
+            <ds-input-label>Experience</ds-input-label>
+            <select (change)="selectChangeHandler($event)" dsNativeControl formControlName="experienceControl">
+              <option value=""></option>
+              <option value="1 Year">1 Year</option>
+              <option value="2 Years">2 Years</option>
+              <option value="3 Years">3 Years</option>
+              <option value="4 Years & above">4 Years & above</option>
+            </select>
+
+          </ds-form-field>
+
+
+        </div>
+        </div> -->
+
+        <div class="form-group">
+          <div class="col-md-12">
+            <ds-input-label>Subject</ds-input-label>
+            <ds-radio-group (change)="radioonChange($event)" formControlName="subjectControl">
+              <div class="d-flex flex-column">
+                <ds-radio-button id="exampleRadios1" value="Tamil">
+                  Tamil
+                </ds-radio-button>
+                <ds-radio-button id="exampleRadios2" value="English">
+                  English
+                </ds-radio-button>
+                <ds-radio-button id="exampleRadios3" value="Maths">
+                  Maths
+                </ds-radio-button>
+                <ds-radio-button id="exampleRadios4" value="Science">
+                  Science
+                </ds-radio-button>
+                <ds-radio-button id="exampleRadios5" value="Social">
+                  Social
+                </ds-radio-button>
+              </div>
+            </ds-radio-group>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-12">
+            <ds-form-field>
+              <ds-input-label>Slots</ds-input-label>
+              <select (change)="selectChangeHandler($event)" dsNativeControl formControlName="slots">
+                <!-- Add a blank option only for Safari -->
+                <option value=""></option>
+                <option value="4-5">4-5</option>
+                <option value="5-6">5-6</option>
+                <option value="6-7">6-7</option>
+                <option value="7-8">7-8</option>
+              </select>
+
+            </ds-form-field>
+
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-12">
+            <div footer class="form-row">
+              <button class="mr-8" ds-button size="small" [disabled]="!moreForm.valid"
+                (click)="addItem()">Add</button>&nbsp;
+              <button class="mr-8" ds-button size="small" (click)="reset()">Reset</button>
+            </div>
+          </div>
+        </div>
+       
+        <!-- 
+        <div>
+          <span ds-label variant="custom" class="px-20 ds-borders ds-bgcolor-yellow">
+            <ds-icon [name]="'warning'"></ds-icon>
+            Please fill the all components
+          </span>
+        </div> -->
+
+      </form>
+    </div>
+  </ds-modal>
+</ng-template>
+
+
+<div class="col-md-8 mt-4 mt-4" style="width: 70%; margin: auto;" *ngIf="currentTab=='tutiondetails'">
+  <table *ngIf="teachersList.length>0" class="table table-bordered" border="1">
+    <thead>
+      <tr>
+        <th>Student Name</th>
+        <th>Teacher Name</th>
+        <th>Subject</th>
+        <th>Slots</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- <tr *ngFor="let item of list">
+        <td><span>{{item.nameControl}}</span></td>
+        </tr> -->
+
+      <tr *ngFor="let item of teachersList;let i=index">
+        <td><span>{{studentList[i].nameControl}}</span></td>
+        <td><span>{{item.nameControl}}</span></td>
+        <td><span>{{item.subjectControl}}</span></td>
+        <td><span>{{item.slots}}</span></td>
+      </tr>
+
+
+    </tbody>
+
+  </table>
+</div>
+<!-- <ds-modal (closeClick)="modalCloseButtonClick($event)" heading="" closeCaption="close modal" size="large-adaptive">
+    <div body>
+      <h3>DetailsForm</h3> -->
+<!-- <form [formGroup]="tutionForm"> -->
+
+<!-- <div class="col-md-12">
+        <ds-form-field class="mb-10">
+          <ds-input-label>Name</ds-input-label>
+          <input dsInput formControlName="nameControl" />
+          <ds-error errorMessage="Name is <strong>required</strong>"></ds-error>
+        </ds-form-field>
+      </div>
+
+        <div class="col-md-12">
+        <ds-form-field class="mb-10">
+          <ds-input-label>Phone</ds-input-label>
+          <input dsInput formControlName="phoneControl" />
+          <ds-error errorMessage="Phone number is <strong>required</strong>"></ds-error>
+        </ds-form-field>
+      </div> -->
+
+<!-- <div class="col-md-12">
+        <ds-form-field class="mb-10">
+          <ds-input-label>Address</ds-input-label>
+          <input type="text-area" dsInput formControlName="addressControl" />
+          <ds-error errorMessage="Address is <strong>required</strong>"></ds-error>
+        </ds-form-field>
+      </div>
+    
+        <div class="col-md-12">
+        <ds-input-label>Gender</ds-input-label>
+        <ds-radio-group  (change)="radioonChange($event)" formControlName="gender">
+          <div class="d-flex flex-column">
+          <ds-radio-button  id="exampleRadios1" value="Male">
+            Male
+          </ds-radio-button>
+          <ds-radio-button id="exampleRadios2" value="Female">
+            Female
+          </ds-radio-button>
+        </div>
+        </ds-radio-group>
+      </div>
+      
+
+        <div class="col-md-12">
+         <ds-input-label> Select Tution Hours</ds-input-label>
+          <div class="d-flex flex-column">
+            <ds-form-group [legend]="'Checkbox example'" *ngFor="let hours of hourArray.controls; let i = index;">
+            <ds-checkbox required (change)="getselectedtutionvalue($event)" id="inlineCheckbox{{i}}" [formControl]="hours">{{hour[i]}}</ds-checkbox>
+            
+          </ds-form-group>
+          </div>
+        </div>
+
+          <div class="col-md-12">
+        <div footer class="mb-10">
+          <button class="mr-8" ds-button type="submit" size="small" (click)="addItem()">Add</button>&nbsp;
+          <button class="mr-8" ds-button size="small" (click)="reset()">Reset</button>
+        </div>
+      </div> -->
+<!-- </form> -->
+<!-- </div>   
+
+  </ds-modal> -->
+
+
+
+<div class="col-md-8 mt-4 mt-4" style="width: 70%; margin: auto;" *ngIf="currentTab=='studentdetails'">
+
+  <ds-carousel [ariaLabel]="'Multiple Slides'" [autoPlay]="true" [indicatorsPosition]="'center'">
+    <ds-carousel-slide class="carousel" *ngFor="let billboard of billboards; let index = index"
+      [ariaLabel]="slideLabel + ' ' + (index + 1)">
+      <dsa-billboard [data]="billboard"></dsa-billboard>
+    </ds-carousel-slide>
+  </ds-carousel>
+  <!-- 
+      <ds-carousel
+      timings="250ms ease-in"
+      [autoplay]="true"
+      interval="5000"
+      color="accent"
+      maxWidth="auto"
+      proportion="25"
+      slides="5"
+      [loop]="true"
+      [hideArrows]="false"
+      [hideIndicators]="false"
+      [useKeyboard]="true"
+      [useMouseWheel]="false"
+      orientation="ltr"
+    > -->
+  <!-- <ds-carousel-slide
+        *ngFor="let slide of items"
+        [image]="slide.title"
+        overlayColor="#00000040"
+        [hideOverlay]="false"
+      >{{slide.color}}</ds-carousel-slide>
+    </ds-carousel> -->
+  <!-- <img src="{{imgSrc}}"> -->
+
+
+  <!-- <img [ngStyle]="{opacity: imgOpacity}" src="{{ imgSrc }}" /> -->
+
+
+
+  <ds-tabs [ariaLabel]="">
+
+    <ds-tab-item tabCaption="This is tab item">
+      <div ds-tab-title class="d-flex align-items-center justify-content-center">
+
+        <span class="text-left">Elementary School</span>
+      </div>
+      <ds-tile>
+
+        <div class="p-24">
+          <p class="text-body" #printRef>
+            Elementary School
+
+            In elementary school, your child will develop the literacy and numeracy skills they need to succeed
+            throughout their time in school and beyond. Building this foundation in key areas during the elementary
+            school years allows students to unlock their full potential and discover their passions.
+
+            While the learning that takes place in the classroom is very important, elementary school is truly an
+            exciting time in a child’s life because of all the new experiences available beyond the classroom.
+            Whether
+            it’s taking part in after-school programs or participating in sports, there are countless ways for
+            students
+            to get involved in school life and make the most of their experience.
+          </p>
+
+          <ds-expander #expander1 (expandedChange)="onExpanderChange($event)" [expanded]="expanded">
+            <p class="text-body" #printRef>
+              We provide students and educators with inspiring and engaging virtual
+              learning experiences that connect young minds to unique and diverse
+              content, bringing the world to each student and closing the opportunity gap.
+              As a nonprofit organization, we rely on our Donors, Sponsors, Corporate Partners,
+              Foundations, and Content Providers to fulfill our mission, especially
+              for underserved communities. There are many ways to contribute, and all
+              means of support are greatly appreciated.
+            </p>
+          </ds-expander>
+
+          <button ds-button variant="tertiary"
+            [attr.aria-label]="expanded ? 'Show Less - Expanded details' : 'Show More - Expanded details'"
+            [dsExpander]="expander1" [attr.aria-expanded]="expanded ? 'true' : 'false'">
+            {{ expanded ? 'Show Less' : 'Show More' }}
+            <ds-icon [name]="expanded ? 'chevron-up' : 'chevron-down'"></ds-icon>
+          </button>
+
+          <button ds-button dsPrint [size]="'small'" [content]="printRef" [title]="'Heading'"
+            [iconPath]="'https://images.ctfassets.net/8utyj17y1gom/2JXnJrw79KkQOiOMia8Au2/9cbfc2fda65fa5a2127d5b0668d84765/rogers-brand.png'">
+            Print
+          </button>
+        </div>
+      </ds-tile>
+    </ds-tab-item>
+
+
+
+    <ds-tab-item tabCaption="This is tab item">
+      <div ds-tab-title class="d-flex align-items-center justify-content-center">
+        <ds-icon [name]="'check-circle'" class="mr-8"></ds-icon>
+        <span class="text-left">High School</span>
+      </div>
+      <ds-tile>
+        <div class="p-24">
+          <p class="text-body" #printRef1>
+            High School
+
+
+            As a high school student at the TDSB, you have access to an incredible variety of schools, programs and
+            courses. From Africentric and specialized arts programs to technology and athletics, we have something
+            for
+            every student and can help you find the right path for a successful experience in high school and
+            beyond.
+
+            There are also many opportunities to get involved outside of the classroom, from leadership and
+            volunteer
+            activities to sports and clubs. Your high school experience is what you make of it and at the TDSB we
+            provide the opportunity for each individual student to find and follow your passion.
+          </p>
+          <button ds-button dsPrint [size]="'small'" [content]="printRef1" [title]="'Heading'"
+            [iconPath]="'https://images.ctfassets.net/8utyj17y1gom/2JXnJrw79KkQOiOMia8Au2/9cbfc2fda65fa5a2127d5b0668d84765/rogers-brand.png'">
+            Print
+          </button>
+        </div>
+      </ds-tile>
+    </ds-tab-item>
+
+
+
+
+    <ds-tab-item tabCaption="This is tab item">
+      <div ds-tab-title class="d-flex align-items-center justify-content-center">
+        <ds-icon [name]="'check-circle'" class="mr-8"></ds-icon>
+        <span class="text-left">Adult Learners</span>
+      </div>
+      <ds-tile>
+        <div class="p-24">
+          <p class="text-body" #printRef2>Adult Learners
+            The TDSB serves adults at all stages in their lives and careers through our credit programs, general
+            interest courses and ESL classes.
+
+            Continue to learn with us!
+
+            Earn high school credits in night school or at an adult high school
+            Take up a hobby, stay fit, learn a language or gain new skills with our Community Programs
+            Use our Employment Services, Skills Development or Settlement Services
+            Learn English as a Second Language and get your TESL Certification.
+          <div [ngClass]="{
+                  'ds-bgcolor-soot': reverse
+                }">
+            <ds-popover #popover [content]="popoverContent" [triggerLabel]="triggerLabel"
+              [triggerCaption]="triggerCaption" [closeLabel]="closeLabel" [closeCaption]="closeCaption"
+              [placement]="placement" [zIndex]="zIndex" [reverse]="reverse" (elementClick)="handleElementClick($event)">
+            </ds-popover>
+
+            <div #popoverContent>
+              <p>We take a tution for all students.Please check the Tutiondetails</p>
+
+              <!-- <p>Let's open the modal</p> -->
+              <!-- <button ds-button class="d-block w-100" (click)="popover.closePopover(); openModal(modal)">
+                    Open Modal -->
+              <!-- </button> -->
+            </div>
+          </div>
+          <button ds-button dsPrint [size]="'small'" [content]="printRef2" [title]="'Heading'"
+            [iconPath]="'https://images.ctfassets.net/8utyj17y1gom/2JXnJrw79KkQOiOMia8Au2/9cbfc2fda65fa5a2127d5b0668d84765/rogers-brand.png'">
+            Print
+          </button>
+
+
+          <!-- <ng-template #modal>
+                <ds-modal heading="Tution Benefits" closeCaption="Close modal" size="medium">
+                  <div body>
+                    <div class="sb-open-container">
+                     
+                      <div class="col-md-6">
+                        <ds-picture src="{{ imgSrc4 }}" alt="Product Image4" class="md-3"
+                          variant="product4"></ds-picture>
+                          <h4 style="color:green" class="col-md-6">Global Access <span style="color: black;">Make education globally accessible for all school students and tutors.</span></h4>
+                      </div>
+                     
+                      <p></p>
+                      <div>
+                        <ds-picture src="{{ imgSrc5 }}" alt="Product Image5" class="md-8"
+                          variant="product5"></ds-picture>
+                      </div>
+                      <h4 style="color:green" class="md-4">Global Access <span style="color: black;">Make education globally accessible for all school students and tutors.</span></h4>
+                      <div>
+                        <ds-picture src="{{ imgSrc6 }}" alt="Product Image6" 
+                          variant="product6"></ds-picture>
+                      </div>
+                      <div>
+                        <ds-picture src="{{ imgSrc7 }}" alt="Product Image7" 
+                          variant="product7"></ds-picture>
+                      </div>
+                      <div>
+                        <ds-picture src="{{ imgSrc8 }}" alt="Product Image8" 
+                          variant="product8"></ds-picture>
+                      </div>
+                      <div>
+                        <ds-picture src="{{ imgSrc9 }}" alt="Product Image9" 
+                          variant="product9"></ds-picture>
+                      </div>
+                   
+                      <span dsPopover content="Hello" triggerLabel="Open popover inside modal"
+                        closeLabel="Close popover inside modal" [zIndex]="2000">
+                        Popover directive
+                      </span>
+                    </div>
+                  </div>
+                </ds-modal>
+              </ng-template> -->
+
+
+        </div>
+      </ds-tile>
+    </ds-tab-item>
+
+  </ds-tabs>
+  <br />
+
+  <dsa-layout [fullBleedMobile]="true" [colXs]="12" [colSm]="6" [colMd]="6" [spacing]="16" [spacingXs]="0"
+    [marginBottom]="48">
+    <div>
+      <ds-picture src="{{ imgSrc1 }}" alt="Product Image1" ratio="1by1" ratioMd="16by9" ratioLg="1by1"
+        variant="product1"></ds-picture>
+    </div>
+    <div>
+      <ds-picture src="{{ imgSrc2 }}" alt="Product Image2" ratio="1by1" ratioMd="16by9" ratioLg="1by1"
+        variant="product2"></ds-picture>
+    </div>
+    <div>
+      <ds-picture src="{{ imgSrc3 }}" alt="Product Image3" ratio="1by1" ratioMd="16by9" ratioLg="1by1"
+        variant="product3"></ds-picture>
+    </div>
+    <div>
+      <!-- <ds-video videoId="5970862364001"></ds-video> -->
+      <ds-video variant="youtube" [controls]="false" [autoPlay]="true" videoId="NFIkA4HkqyY"></ds-video>
+
+    </div>
+  </dsa-layout>
+
+  <dsa-parallax [data]="images[0]">
+    <h1 class="mb-4">Laboratory</h1>
+  </dsa-parallax>
+  <div>
+    <p>Computer education is essential for today’s generation, so it should be available to all the students.
+
+      With these factors, parents and schools must ensure that they provide the aforementioned list of basic school
+      facilities to students for their well-being along with quality education.</p>
+  </div>
+  <!-- no content example -->
+  <dsa-parallax [data]="images[1]">
+    <h1 class="mb-4">Temperature Control</h1>
+  </dsa-parallax>
+  <div>
+    <p>The classroom’s temperature affects the mood and engagement levels of students and their academic outcomes. If
+      students are feeling too hot or cold, then it directly affects their concentration levels. Proper temperature
+      should be monitored to enable students to focus in a much better way.</p>
+  </div>
+  <!-- container example -->
+  <dsa-parallax [data]="images[2]">
+    <h1 class="mb-4">Playgrounds and Sport Facilities</h1>
+  </dsa-parallax>
+  <div>
+    <p>We provide adequate spacing for playgrounds to students for the improvement of physical and mental health, sports
+      facilities.However, facilities like basketball courts, table tennis tables and badminton and more are essential in
+      today’s era when sports play a major role in students’ lives. </p>
+  </div>
+  <dsa-parallax [data]="images[3]">
+    <h1 class="mb-4">Acoustics and Noise</h1>
+  </dsa-parallax>
+  <div>
+    <p>A classroom equipped with furnished desks and table should be a quiet place where the students can have mental
+      peace and they are able to concentrate without any distractions. Noisy classrooms generally have poor effects when
+      it comes to learning.</p>
+  </div>
+
+  <div>
+    <dsa-footer [data]="footer" (elementClick)="handleClick2($event)">footer</dsa-footer>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="col-md-8 mt-4 mt-4" style="width: 70%; margin:50px" *ngIf="currentTab=='basicdetails'">
+  <table *ngIf="list.length>0" class="table table-bordered" style="margin-left:70px" border="1">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Percentage</th>
+        <th>Gender</th>
+        <th>Slots</th>
+        <th>Files</th>
+        <th>Action</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of list">
+        <td><span>{{item.nameControl}}</span></td>
+        <td><span>{{item.phoneControl}}</span></td>
+        <td><span>{{item.addressControl}}</span></td>
+        <td><span>{{item.percentageControl}}</span></td>
+        <td><span>{{item.gender}}</span></td>
+        <td><span>{{item.slots}}</span></td>
+        <td><span>{{item.fileUpload}}</span></td>
+        <td><span><button ds-button size="small" (click)="remove(item)">
+              Remove
+            </button></span></td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+</div>
+
+<div class="col-md-8 mt-4 mt-4" style="width: 70%;" *ngIf="currentTab=='moredetails'">
+  <table *ngIf="morelist.length>0" class="table table-bordered" style="margin-left:70px" border="1">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>E-mail</th>
+        <th>Experience</th>
+        <th>Subject</th>
+        <th>Slots</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of morelist">
+        <td><span>{{item.nameControl}}</span></td>
+        <td><span>{{item.phoneControl}}</span></td>
+        <td><span>{{item.emailControl}}</span></td>
+        <td><span>{{item.experienceControl}}</span></td>
+        <td><span>{{item.subjectControl}}</span></td>
+        <td><span>{{item.slots}}</span></td>
+        <td><span><button ds-button size="small" (click)="remove(item)">
+              Remove
+            </button></span>
+          <ds-icon name="close"></ds-icon>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- <div class="col-md-8 mt-4 mt-4" style="width: 70%; margin: auto;" *ngIf="currentTab=='tutiondetails'">
+  <table *ngIf="tution.length>0" class="table table-bordered" border="1">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Gender</th>
+        <th>Tution Hours</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of tution">
+        <td><span>{{item.nameControl}}</span></td>
+        <td><span>{{item.phoneControl}}</span></td>
+        <td><span>{{item.addressControl}}</span></td>
+        <td><span>{{item.gender}}</span></td>
+        <td><span>{{this.selectedtutionValue}}</span></td>
+        <td><span><button ds-button size="small" (click)="remove(item)">
+              Remove
+            </button></span></td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+</div> -->

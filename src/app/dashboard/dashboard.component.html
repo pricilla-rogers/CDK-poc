@@ -1,3 +1,4 @@
+
 <h2>Student Details</h2>
 <!-- [ngStyle]="{'color':bgColor,'text-decoration':decor}" -->
 
@@ -55,9 +56,9 @@
 <br>
 
 
-
+<!-- 
 <dsa-elastic-tile *ngFor="let tile of tiles" [elasticTile]="tile.heading" (elementClick)="handleClick($event)"
-  (expanderClick)="handleClick($event)"></dsa-elastic-tile>
+  (expanderClick)="handleClick($event)"></dsa-elastic-tile> -->
 
 <!-- basicdetails modal start -->
 <ng-template #basicdetails>
@@ -468,7 +469,7 @@
             students
             to get involved in school life and make the most of their experience.
           </p>
-
+          <button ds-button type="button" (click)="details()">show details</button>
           <ds-expander #expander1 (expandedChange)="onExpanderChange($event)" [expanded]="expanded">
             <p class="text-body" #printRef>
               We provide students and educators with inspiring and engaging virtual
@@ -622,6 +623,8 @@
   </ds-tabs>
   <br />
 
+ 
+
   <dsa-layout [fullBleedMobile]="true" [colXs]="12" [colSm]="6" [colMd]="6" [spacing]="16" [spacingXs]="0"
     [marginBottom]="48">
     <div>
@@ -637,47 +640,19 @@
         variant="product3"></ds-picture>
     </div>
     <div>
-      <!-- <ds-video videoId="5970862364001"></ds-video> -->
+     
       <ds-video variant="youtube" [controls]="false" [autoPlay]="true" videoId="NFIkA4HkqyY"></ds-video>
 
     </div>
   </dsa-layout>
 
-  <dsa-parallax [data]="images[0]">
-    <h1 class="mb-4">Laboratory</h1>
-  </dsa-parallax>
-  <div>
-    <p>Computer education is essential for today’s generation, so it should be available to all the students.
+  <dsa-info
+*ngFor="let info of banners"
+[info]="info"
+(elementClick)="handleClick($event)"
+></dsa-info>
 
-      With these factors, parents and schools must ensure that they provide the aforementioned list of basic school
-      facilities to students for their well-being along with quality education.</p>
-  </div>
-  <!-- no content example -->
-  <dsa-parallax [data]="images[1]">
-    <h1 class="mb-4">Temperature Control</h1>
-  </dsa-parallax>
-  <div>
-    <p>The classroom’s temperature affects the mood and engagement levels of students and their academic outcomes. If
-      students are feeling too hot or cold, then it directly affects their concentration levels. Proper temperature
-      should be monitored to enable students to focus in a much better way.</p>
-  </div>
-  <!-- container example -->
-  <dsa-parallax [data]="images[2]">
-    <h1 class="mb-4">Playgrounds and Sport Facilities</h1>
-  </dsa-parallax>
-  <div>
-    <p>We provide adequate spacing for playgrounds to students for the improvement of physical and mental health, sports
-      facilities.However, facilities like basketball courts, table tennis tables and badminton and more are essential in
-      today’s era when sports play a major role in students’ lives. </p>
-  </div>
-  <dsa-parallax [data]="images[3]">
-    <h1 class="mb-4">Acoustics and Noise</h1>
-  </dsa-parallax>
-  <div>
-    <p>A classroom equipped with furnished desks and table should be a quiet place where the students can have mental
-      peace and they are able to concentrate without any distractions. Noisy classrooms generally have poor effects when
-      it comes to learning.</p>
-  </div>
+
 
   <div>
     <dsa-footer [data]="footer" (elementClick)="handleClick2($event)">footer</dsa-footer>

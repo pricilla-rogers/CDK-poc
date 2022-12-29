@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, TemplateRef, ViewContainerRef,SimpleChanges } from '@angular/core';
-import { ModalRef, ModalService } from '@rogers/cdk/modal';
+import { ModalComponent,ModalRef, ModalService } from '@rogers/cdk/modal';
 // import { FormModalComponent} from 'src/app/form-modal/form-modal.component';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
@@ -17,6 +17,8 @@ import { PopoverComponent } from '@rogers/cdk/popover';
 import { ElasticTile } from '@rogers/cdk/assembled/elastic-tile/elastic-tile.interface';
 import { Parallax } from '@rogers/cdk/assembled/parallax/parallax.interface';
 import { Footer } from '@rogers/cdk/assembled/footer';
+import { Button } from '@rogers/cdk/button';
+import { Info } from '@rogers/cdk/assembled/info';
 
 
 
@@ -30,7 +32,8 @@ export class DashboardComponent implements OnInit {
   hour: Array<String>=['5-6','6-7','7-8','8-9'];
   selectedtutionValue=[];
   tiles: Array<ElasticTile>;
-  images: Array<Parallax>;
+ 
+  banners: Array<Info>;
   footer: Footer;
   data1={copy:{title:"Please fill the all components"}};
  
@@ -177,138 +180,105 @@ export class DashboardComponent implements OnInit {
         logo: {
           image: {
             url:
-              'https://images.ctfassets.net/2v2b28hn7ahz/6Beub77NSOfzUP6RyJ9EJx/a737609652fb61c4a4d8a2119d57bf4f/rogers.svg',
-            alt: 'Rogers',
+              'https://cdn.logojoy.com/wp-content/uploads/2018/05/30154545/7_big6.png',
+            alt: '',
           },
           cta: {
             copy: '',
-            val: 'https://www.rogers.com',
-            alt: 'Rogers Homepage',
+            val: '',
+            alt: '',
           },
         },
         col1: [
-          {
-            copy: 'Investor Relations',
-            val: '/link-val',
-            alt: '',
-          },
-          {
-            copy: 'Social Responsibility',
-            val: '/link-val',
-            alt: '',
-          },
-          {
-            copy: 'Community Investment',
-            val: '/link-val',
-            alt: '',
-          },
-          {
-            copy: 'About Rogers',
-            val: '/link-val',
-            alt: '',
-          },
+         
+        
         ],
         col2: [
-          {
-            copy: 'Privacy & CRTC',
-            val: '/link-val',
-            alt: '',
-          },
-          {
-            copy: 'Ad Choices',
-            val: '/link-val',
-            alt: '',
-          },
-          {
-            copy: 'Careers',
-            val: '/link-val',
-            alt: '',
-          },
-          {
-            copy: 'Accessibility Services',
-            val: '/link-val',
-            alt: '',
-          },
+          
+        
         ],
-        col3: [
-          {
-            copy: 'Terms & Conditions',
-            val: '/link-val',
-            alt: '',
-          },
-          {
-            copy: 'Site Map',
-            val: '/link-val',
-            alt: '',
-          },
-          {
-            copy: 'Media Contact',
-            val: '/link-val',
-            alt: '',
-          },
-          {
-            copy: 'Unsubscribe',
-            val: '/link-val',
-            alt: '',
-          },
-          {
-            copy: 'Community Forums',
-            val: '/link-val',
-            alt: '',
-          },
-        ],
+       
         cta: [
-          {
-            copy: '1 866 584-1211',
-            val: '/link-val',
-            icon: 'cdk-icon-call',
-            alt: 'cdk-icon-call',
-          },
-          {
-            copy: 'Live chat',
-            val: '/link-val',
-            icon: 'cdk-icon-support',
-            alt: 'cdk-icon-support',
-          },
-          {
-            copy: 'Find a store',
-            val: '/link-val',
-            icon: 'cdk-icon-shop',
-            alt: 'cdk-icon-shop',
-          },
+        
+       
         ],
         social: [
-          {
-            copy: 'Facebook',
-            val: '/link-val',
-            icon: 'cdk-icon-facebook',
-            iconOnly: true,
-            alt: '',
-          },
-          {
-            copy: 'Google+',
-            val: '/link-val',
-            icon: 'cdk-icon-twitter',
-            iconOnly: true,
-            alt: '',
-          },
-          {
-            copy: 'Twitter',
-            val: '/link-val',
-            icon: 'cdk-icon-youtube',
-            iconOnly: true,
-            alt: '',
-          },
-          {
-            copy: 'Chat',
-            val: '/link-val',
-            icon: 'cdk-icon-linkedIn',
-            iconOnly: true,
-            alt: '',
-          },
+
+          
         ],
       },
     };
+
+    this.banners = [
+      {
+        image: {
+          src:
+            'https://images.ctfassets.net/2v2b28hn7ahz/tl8CBdByW14DtKvR7WpJc/d06b4e667a3122d27c33c75651cdd002/lifestyle-hands-up.jpg',
+          alt: 'Leads Gen',
+        },
+        copy: {
+          header: 'OUR VALUES',
+          body: 'In our school, everything that we do is guided by these 5 core values:',
+        },
+        cta: {
+          copy: 'Read More',
+          val: '/read more',
+          href: 'details',
+          alt: 'Read morre',
+        },
+      },
+      {
+        image: {
+          src:
+            'https://images.ctfassets.net/2v2b28hn7ahz/tl8CBdByW14DtKvR7WpJc/d06b4e667a3122d27c33c75651cdd002/lifestyle-hands-up.jpg',
+          alt: 'Leads Gen',
+        },
+        copy: {
+          header: '',
+          body: 'Planning to enroll your child in a good school? Consider these factors for wise decision!',
+        },
+        cta: {
+          copy: 'Read More',
+          val: '/read more',
+          href: 'details',
+          target: '_blank',
+        },
+        isImageIcon: false,
+      },
+      {
+        backgroundColor: 'misty',
+        copy: {
+          header: 'Lorem ipsum dolor sit amet consecte',
+          body: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+        },
+        cta: {
+          copy: 'Lorem ipsum doloras',
+          val: '/contact-us',
+          alt: 'Contact Us',
+          variant: 'tertiary',
+          icon: 'edit',
+        },
+      },
+      {
+        image: {
+          src:
+            'https://images.ctfassets.net/2v2b28hn7ahz/tl8CBdByW14DtKvR7WpJc/d06b4e667a3122d27c33c75651cdd002/lifestyle-hands-up.jpg',
+          alt: 'Leads Gen',
+        },
+        copy: {
+          header: 'Lorem ipsum dolor sit amet consecte',
+          body: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
+          icon: 'avatar',
+        },
+        cta: {
+          copy: 'Lorem ipsum doloras',
+          val: '/contact-us',
+          alt: 'Contact Us',
+        },
+        showMobileImage: false,
+      },
+    ];
+
     this.billboards = [
       {
         header: '',
@@ -406,46 +376,7 @@ export class DashboardComponent implements OnInit {
       },
     ];
 
-    this.images = [
-      {
-        src:
-          'assets/para5.jpeg',
-        alt: 'Parallax image greenhouse',
-        mobileSrc:
-          'assets/para.jpeg',
-          height: 100,
-          heightSm: 200,
-          heightMd: 400,
-          heightLg: 600,
-      },
-      {
-        src:
-          'assets/para6.jpeg',
-        alt: 'Parallax image rain',
-        height: 100,
-        heightSm: 200,
-        heightMd: 400,
-        heightLg: 600,
-      },
-      {
-        src:
-          'assets/para7.jpeg',
-        alt: 'Parallax image yacht',
-        height: 100,
-        heightSm: 200,
-        heightMd: 400,
-        heightLg: 600,
-      },
-      {
-        src:
-          'assets/para8.jpeg',
-        alt: 'Parallax image plant',
-        height: 100,
-        heightSm: 200,
-        heightMd: 400,
-        heightLg: 600,
-      },
-    ];
+   
   
     this.tiles = [
       {
@@ -781,6 +712,11 @@ selectedDay:string='';
   handleClick2(event) {
     console.log('Data:', event);
   }
+
+  handleClick3(cta: Button) {
+    console.log('cta: ', cta);
+  }
+
   // ngOnIt(): void {
     
     
@@ -798,6 +734,9 @@ selectedDay:string='';
   onExpanderChange(isExpanded: boolean) {
     this.expanded = isExpanded;
     this.event.emit(isExpanded);
+  }
+  details(){
+    this.router.navigateByUrl('details')
   }
    ngAfterViewInit() {
   //   // property "activeIndex" of tabs can be accessed this way

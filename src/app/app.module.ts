@@ -19,6 +19,7 @@ import { TabsModule } from '@rogers/cdk/tabs';
 import { TileModule } from '@rogers/cdk/tile';
 import { IconModule } from '@rogers/cdk/icon';
 
+
 import { AuthGuard } from './auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PictureModule } from '@rogers/cdk/picture';
@@ -35,12 +36,19 @@ import { LabelModule } from '@rogers/cdk/label';
 import { ParallaxModule } from '@rogers/cdk/assembled/parallax';
 import { FooterModule } from '@rogers/cdk/assembled/footer';
 import { PrintModule } from '@rogers/cdk/print';
+import { CDKCoreModule } from '@rogers/cdk/core';
+import { InfoModule } from '@rogers/cdk/assembled/info';
+import { DetailsComponent } from './details/details.component';
+import { ValuesComponent } from './values/values.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    DetailsComponent,
+    ValuesComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +65,11 @@ import { PrintModule } from '@rogers/cdk/print';
     ReactiveFormsModule,
     TabsModule,
     IconModule,
+    CDKCoreModule.forRoot({
+
+  brand: 'rogers', // rogers | fido | chatr | r4b
+
+}),
     PictureModule,
     FormLeadGenModule,
     CarouselModule,
@@ -69,7 +82,8 @@ import { PrintModule } from '@rogers/cdk/print';
     LabelModule,
     ParallaxModule,
     FooterModule,
-    PrintModule
+    PrintModule,
+    InfoModule
 
   ],
   providers: [AuthGuard],

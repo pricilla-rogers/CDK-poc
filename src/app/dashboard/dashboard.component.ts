@@ -217,7 +217,7 @@ export class DashboardComponent implements OnInit {
           alt: 'Leads Gen',
         },
         copy: {
-          header: 'OUR VALUES',
+          header: '',
           body: 'In our school, everything that we do is guided by these 5 core values:',
         },
         cta: {
@@ -230,7 +230,7 @@ export class DashboardComponent implements OnInit {
       {
         image: {
           src:
-            'https://images.ctfassets.net/2v2b28hn7ahz/tl8CBdByW14DtKvR7WpJc/d06b4e667a3122d27c33c75651cdd002/lifestyle-hands-up.jpg',
+            'https://i.pinimg.com/736x/ec/06/c5/ec06c5139310705f3e3c59e207d3189a.jpg',
           alt: 'Leads Gen',
         },
         copy: {
@@ -245,38 +245,8 @@ export class DashboardComponent implements OnInit {
         },
         isImageIcon: false,
       },
-      {
-        backgroundColor: 'misty',
-        copy: {
-          header: 'Lorem ipsum dolor sit amet consecte',
-          body: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
-        },
-        cta: {
-          copy: 'Lorem ipsum doloras',
-          val: '/contact-us',
-          alt: 'Contact Us',
-          variant: 'tertiary',
-          icon: 'edit',
-        },
-      },
-      {
-        image: {
-          src:
-            'https://images.ctfassets.net/2v2b28hn7ahz/tl8CBdByW14DtKvR7WpJc/d06b4e667a3122d27c33c75651cdd002/lifestyle-hands-up.jpg',
-          alt: 'Leads Gen',
-        },
-        copy: {
-          header: 'Lorem ipsum dolor sit amet consecte',
-          body: 'Lorem ipsum dolor sit amet, consectetur adipiscing',
-          icon: 'avatar',
-        },
-        cta: {
-          copy: 'Lorem ipsum doloras',
-          val: '/contact-us',
-          alt: 'Contact Us',
-        },
-        showMobileImage: false,
-      },
+      
+     
     ];
 
     this.billboards = [

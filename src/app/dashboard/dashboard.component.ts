@@ -172,15 +172,15 @@ export class DashboardComponent implements OnInit {
     this.footer = {
       static: {
         copyright: {
-          years: '&copy; 1995 - 2018',
-          organization: 'Rogers Communications',
+          years: '&copy; 1995 - 2023',
+          organization: ' Pinellas County School',
         },
       },
       dynamic: {
         logo: {
           image: {
             url:
-              'https://cdn.logojoy.com/wp-content/uploads/2018/05/30154545/7_big6.png',
+              'https://www.pcsb.org/cms/lib/FL01903687/Centricity/Template/30/pcs-footer-logo-2x.png',
             alt: '',
           },
           cta: {
@@ -218,12 +218,12 @@ export class DashboardComponent implements OnInit {
         },
         copy: {
           header: '',
-          body: 'In our school, everything that we do is guided by these 5 core values:',
+          body: 'In our school, everything that we do is guided by these 4 core values:',
         },
         cta: {
           copy: 'Read More',
           val: '/read more',
-          href: 'details',
+          href: 'values',
           alt: 'Read morre',
         },
       },
